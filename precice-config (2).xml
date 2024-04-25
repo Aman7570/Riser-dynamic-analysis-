@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<precice-configuration>
+  <log>
+    <sink
+      filter="%Severity% > debug and %Rank% = 0"
+      format="---[precice] %ColorizedSeverity% %Message%"
+      enabled="true" />
+  </log>
+
+    <data:vector name="Force-1" />
+    <data:vector name="Displacement-1" />
+    <data:vector name="Force-2" />
+    <data:vector name="Displacement-2" />
+    <data:vector name="Force-3" />
+    <data:vector name="Displacement-3" />
+    <data:vector name="Force-4" />
+    <data:vector name="Displacement-4" />
+    <data:vector name="Force-5" />
+    <data:vector name="Displacement-5" />
+   
+
+
+    <mesh name="Fluid-Mesh-1"  dimensions="2">
+      <use-data name="Force-1" />
+      <use-data name="Displacement-1" />
+    </mesh>
+
+    <mesh name="Fluid-Mesh-2"  dimensions="2">
+      <use-data name="Force-2" />
+      <use-data name="Displacement-2" />
+    </mesh>
+   
+    <mesh name="Fluid-Mesh-3"  dimensions="2">
+      <use-data name="Force-3" />
+      <use-data name="Displacement-3" />
+    </mesh>
+
+    <mesh name="Fluid-Mesh-4"  dimensions="2">
+      <use-data name="Force-4" />
+      <use-data name="Displacement-4" />
+    </mesh>
+    
+    <mesh name="Fluid-Mesh-5"  dimensions="2">
+      <use-data name="Force-5" />
+      <use-data name="Displacement-5" />
+    </mesh>
+
+  
+
+
+
+
+    <mesh name="Solid-Mesh-1"  dimensions="2">
+      <use-data name="Displacement-1" />
+      <use-data name="Force-1" />
+    </mesh>
+
+   <mesh name="Solid-Mesh-2"  dimensions="2">
+      <use-data name="Displacement-2" />
+      <use-data name="Force-2" />
+    </mesh>
+    
+    <mesh name="Solid-Mesh-3"  dimensions="2">
+      <use-data name="Displacement-3" />
+      <use-data name="Force-3" />
+    </mesh>
+
+   <mesh name="Solid-Mesh-4"  dimensions="2">
+      <use-data name="Displacement-4" />
+      <use-data name="Force-4" />
+    </mesh>
+    <mesh name="Solid-Mesh-5"  dimensions="2">
+      <use-data name="Displacement-5" />
+      <use-data name="Force-5" />
+    </mesh>
+
+  
+
+
+
+    <participant name="Fluid-1">
+      <provide-mesh name="Fluid-Mesh-1"  />
+      <receive-mesh name="Solid-Mesh-1" from="Solid" />
+      <write-data name="Force-1" mesh="Fluid-Mesh-1" />
+      <read-data name="Displacement-1" mesh="Fluid-Mesh-1" />
+      <mapping:nearest-neighbor direction="write"  from="Fluid-Mesh-1"
+        to="Solid-Mesh-1"
+        constraint="conservative"/>
+      <mapping:nearest-neighbor direction="read"  from="Solid-Mesh-1"
+        to="Fluid-Mesh-1" constraint="consistent"/>
+    </participant>
+
+    <participant name="Fluid-2">
+      <provide-mesh name="Fluid-Mesh-2"  />
+      <receive-mesh name="Solid-Mesh-2" from="Solid" />
+      <write-data name="Force-2" mesh="Fluid-Mesh-2" />
+      <read-data name="Displacement-2" mesh="Fluid-Mesh-2" />
+      <mapping:nearest-neighbor direction="write"  from="Fluid-Mesh-2"
+        to="Solid-Mesh-2"
+        constraint="conservative"/>
+      <mapping:nearest-neighbor direction="read"  from="Solid-Mesh-2"
+        to="Fluid-Mesh-2" constraint="consistent"/>
+    </participant>
+     
+    <participant name="Fluid-3">
+      <provide-mesh name="Fluid-Mesh-3"  />
+      <receive-mesh name="Solid-Mesh-3" from="Solid" />
+      <write-data name="Force-3" mesh="Fluid-Mesh-3" />
+      <read-data name="Displacement-3" mesh="Fluid-Mesh-3" />
+      <mapping:nearest-neighbor direction="write"  from="Fluid-Mesh-3"
+        to="Solid-Mesh-3"
+        constraint="conservative"/>
+      <mapping:nearest-neighbor direction="read"  from="Solid-Mesh-3"
+        to="Fluid-Mesh-3" constraint="consistent"/>
+    </participant>
+    
+     <participant name="Fluid-4">
+      <provide-mesh name="Fluid-Mesh-4"  />
+      <receive-mesh name="Solid-Mesh-4" from="Solid" />
+      <write-data name="Force-4" mesh="Fluid-Mesh-4" />
+      <read-data name="Displacement-4" mesh="Fluid-Mesh-4" />
+      <mapping:nearest-neighbor direction="write"  from="Fluid-Mesh-4"
+        to="Solid-Mesh-4"
+        constraint="conservative"/>
+      <mapping:nearest-neighbor direction="read"  from="Solid-Mesh-4"
+        to="Fluid-Mesh-4" constraint="consistent"/>
+    </participant>
+    
+    <participant name="Fluid-5">
+      <provide-mesh name="Fluid-Mesh-5"  />
+      <receive-mesh name="Solid-Mesh-5" from="Solid" />
+      <write-data name="Force-5" mesh="Fluid-Mesh-5" />
+      <read-data name="Displacement-5" mesh="Fluid-Mesh-5" />
+      <mapping:nearest-neighbor direction="write"  from="Fluid-Mesh-5"
+        to="Solid-Mesh-5"
+        constraint="conservative"/>
+      <mapping:nearest-neighbor direction="read"  from="Solid-Mesh-5"
+        to="Fluid-Mesh-5" constraint="consistent"/>
+    </participant>
+    
+   
+    
+  
+     
+
+
+
+
+
+
+
+    <participant name="Solid">
+      <provide-mesh name="Solid-Mesh-1"  />
+      <provide-mesh name="Solid-Mesh-2"  />
+      <provide-mesh name="Solid-Mesh-3"  />
+      <provide-mesh name="Solid-Mesh-4"  />
+      <provide-mesh name="Solid-Mesh-5"  />
+  
+      <write-data name="Displacement-1" mesh="Solid-Mesh-1" />
+      <read-data name="Force-1" mesh="Solid-Mesh-1" />
+      <write-data name="Displacement-2" mesh="Solid-Mesh-2" />
+      <read-data name="Force-2" mesh="Solid-Mesh-2" />
+      <write-data name="Displacement-3" mesh="Solid-Mesh-3" />
+      <read-data name="Force-3" mesh="Solid-Mesh-3" />
+      <write-data name="Displacement-4" mesh="Solid-Mesh-4" />
+      <read-data name="Force-4" mesh="Solid-Mesh-4" />
+      <write-data name="Displacement-5" mesh="Solid-Mesh-5" />
+      <read-data name="Force-5" mesh="Solid-Mesh-5" />
+     
+      
+      
+
+     
+    </participant>
+
+    <m2n:sockets acceptor="Fluid-1" connector="Solid" exchange-directory=".." enforce-gather-scatter="1"/>
+    <m2n:sockets acceptor="Fluid-2" connector="Solid" exchange-directory=".." enforce-gather-scatter="1"/>
+    <m2n:sockets acceptor="Fluid-3" connector="Solid" exchange-directory=".." enforce-gather-scatter="1"/>
+    <m2n:sockets acceptor="Fluid-4" connector="Solid" exchange-directory=".." enforce-gather-scatter="1"/>
+    <m2n:sockets acceptor="Fluid-5" connector="Solid" exchange-directory=".." enforce-gather-scatter="1"/>
+    
+
+
+    <coupling-scheme:serial-explicit>
+      <time-window-size value="0.01" />
+      <max-time value="20" />
+      <participants first="Fluid-1" second="Solid" />
+      <exchange data="Force-1" mesh="Solid-Mesh-1" from="Fluid-1" to="Solid" />
+      <exchange data="Displacement-1" mesh="Solid-Mesh-1" from="Solid" to="Fluid-1" />
+    </coupling-scheme:serial-explicit>
+
+    <coupling-scheme:serial-explicit>
+      <time-window-size value="0.01" />
+      <max-time value="20" />
+      <participants first="Fluid-2" second="Solid" />
+      <exchange data="Force-2" mesh="Solid-Mesh-2" from="Fluid-2" to="Solid" />
+      <exchange data="Displacement-2" mesh="Solid-Mesh-2" from="Solid" to="Fluid-2" />
+    </coupling-scheme:serial-explicit>
+  
+    <coupling-scheme:serial-explicit>
+      <time-window-size value="0.01" />
+      <max-time value="20" />
+      <participants first="Fluid-3" second="Solid" />
+      <exchange data="Force-3" mesh="Solid-Mesh-3" from="Fluid-3" to="Solid" />
+      <exchange data="Displacement-3" mesh="Solid-Mesh-3" from="Solid" to="Fluid-3" />
+    </coupling-scheme:serial-explicit>
+
+    <coupling-scheme:serial-explicit>
+      <time-window-size value="0.01" />
+      <max-time value="20" />
+      <participants first="Fluid-4" second="Solid" />
+      <exchange data="Force-4" mesh="Solid-Mesh-4" from="Fluid-4" to="Solid" />
+      <exchange data="Displacement-4" mesh="Solid-Mesh-4" from="Solid" to="Fluid-4" />
+    </coupling-scheme:serial-explicit>
+
+    <coupling-scheme:serial-explicit>
+      <time-window-size value="0.01" />
+      <max-time value="20" />
+      <participants first="Fluid-5" second="Solid" />
+      <exchange data="Force-5" mesh="Solid-Mesh-5" from="Fluid-5" to="Solid" />
+      <exchange data="Displacement-5" mesh="Solid-Mesh-5" from="Solid" to="Fluid-5" />
+    </coupling-scheme:serial-explicit>
+
+   
+    
+
+</precice-configuration>
